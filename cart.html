@@ -281,7 +281,7 @@ span.cartProductItemOriginalPrice{
 
 
 
-//without js
+//with part js
 <!DOCTYPE html>
 <script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
 <link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
@@ -304,6 +304,78 @@ span.cartProductItemOriginalPrice{
     return (((sign)?'':'-') + num + '.' + cents);  
 }
  
+  function syncCreateOrderButton(){
+    var selectAny=false;
+    $(".cartProductItemIfSelected").each(function(){
+      if("selectit"==$(this).attr("selectit"))
+        selectAny=true;       
+    });
+    if(selectAny){
+      $(".createOrderButton").css("background-color","#C40000");
+      $(".createOrderButton").removeAttr("disabled");
+    }else{
+      $(".createOrderButton").css("background-color","#AAAAAA");
+      $(".createOrderButton").attr("disabled","disabled");
+    }
+  }
+  
+  function syncSelect(){
+    var selectAll=true;
+    $(".cartProductItemIfSelected").each(function(){
+      if("false"==$(this).attr("selectit"))
+         selectAll=false;
+    });
+      if(selectAll){
+        $(".selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+        $(".selectAllItem").attr("selectit","selectit");
+      }else{
+        $(".selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+        $(".selectAllItem").attr("selectit","false");
+      }
+  }
+  
+  function calcCartSumPriceAndNumber(){
+    var sum=0;
+    var totalNum=0;
+    $(".cartProductItemIfSelected[selectit='selectit']").each(function(){
+      var oiid=$(this).attr("oiid");
+      var price=$(".cartProductItemSmallSumPrice[oiid="+oiid+"]").text();
+      price=price.replace(/,/g,"");
+      price=price.replace(/￥/g,"");
+      sum+=new Number(price);
+      var num=$(".orderItemNumberSetting[oiid="+oiid+"]").val();
+      totalNum+=new Number(num);
+    });
+    $(".cartTitlePrice").html("￥"+formatMoney(sum));
+    $(".cartSumPrice").html("￥"+formatMoney(sum));
+    $(".cartSumNumber").html(totalNum);
+  }
+  function calcPrice(pid,num,price){
+    $(".orderItemNumberSetting[pid="+pid+"]").html(num);
+    var cartProductItemSmallSumPrice=formatMoney(num*price);
+    $(".cartProductItemSmallSumPrice").html("￥"+cartProductItemSmallSumPrice);
+    calcCartSumPriceAndNumber();
+  }
+  
+
+  $(function(){
+    $(".cartProductItemIfSelected").click(function(){
+      if("selectit"==$(this).attr("selectit")){
+        $(this).attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+        $(this).attr("selectit","false");
+        $(this).parents(".cartProductItemTR").css("background-color","#fff");
+      }else{
+        $(this).attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+        $(this).attr("selectit","selectit");
+        $(this).parents(".cartProductItemTR").css("background-color","#fff8e1");
+      }
+      syncCreateOrderButton();
+      syncSelect();
+      calcCartSumPriceAndNumber();
+    });
+    
+  });
+                                         
 </script>
 
 <style>
@@ -487,7 +559,7 @@ span.cartProductItemOriginalPrice{
           </td>
           <td>
             <span class="cartProductItemOriginalPrice">￥7580.0</span>
-            <span class="cartProductPromotionPrice">￥5306.0</span>
+            <span class="cartProductItemPromotionPrice">￥5306.0</span>
           </td>
           <td>
             <div class="cartProductChangeNumberDiv">
@@ -557,4 +629,4 @@ span.cartProductItemOriginalPrice{
       <button class="createOrderButton" style="background-color:rgb(170,170,170)" disabled="disabled">结算</button>
     </div>
   </div>
-</div>
+</div> 
