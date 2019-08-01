@@ -374,6 +374,25 @@ span.cartProductItemOriginalPrice{
       calcCartSumPriceAndNumber();
     });
     
+    $(".selectAllItem").click(function(){
+      if("selectit"==$(this).attr("selectit")){
+         $(".selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+        $(".selectAllItem").attr("selectit","false");
+        $(".cartProductItemIfSelected").each(function(){
+          $(".cartProductItemIfSelected").attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+          $(".cartProductItemIfSelected").attr("selectit","false");
+        });
+      }else{
+        $(".selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+        $(".selectAllItem").attr("selectit","selectit");
+        $(".cartProductItemIfSelected").each(function(){
+          $(".cartProductItemIfSelected").attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+          $(".cartProductItemIfSelected").attr("selectit","selectit");
+        });
+      }
+      syncCreateOrderButton();
+      calcCartSumPriceAndNumber();
+    });
   });
                                          
 </script>
