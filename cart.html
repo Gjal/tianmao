@@ -281,7 +281,7 @@ span.cartProductItemOriginalPrice{
 
 
 
-//with part js
+//with js
 <!DOCTYPE html>
 <script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
 <link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
@@ -351,9 +351,9 @@ span.cartProductItemOriginalPrice{
     $(".cartSumNumber").html(totalNum);
   }
   function calcPrice(pid,num,price){
-    $(".orderItemNumberSetting[pid="+pid+"]").html(num);
+    $(".orderItemNumberSetting[pid="+pid+"]").val(num);
     var cartProductItemSmallSumPrice=formatMoney(num*price);
-    $(".cartProductItemSmallSumPrice").html("￥"+cartProductItemSmallSumPrice);
+    $(".cartProductItemSmallSumPrice[pid="+pid+"]").html("￥"+cartProductItemSmallSumPrice);
     calcCartSumPriceAndNumber();
   }
   
@@ -392,6 +392,39 @@ span.cartProductItemOriginalPrice{
       }
       syncCreateOrderButton();
       calcCartSumPriceAndNumber();
+    });
+    $(".numberPlus").click(function(){ 
+      var pid=$(this).attr("pid");
+      var stock=$(".orderItemStock[pid="+pid+"]").text();
+      var price=$(".orderItemPromotePrice[pid="+pid+"]").text();
+      var num=$(".orderItemNumberSetting[pid="+pid+"]").val();
+      ++num;
+      if(num>stock)
+        num=stock;
+      calcPrice(pid,num,price)
+    } );
+    $(".numberMinus").click(function(){
+      var pid=$(this).attr("pid");
+      var price=$(".orderItemPromotePrice[pid="+pid+"]").text();
+      var num=$(".orderItemNumberSetting[pid="+pid+"]").val();
+      --num;
+      if(num<=0)
+        num=1;
+      calcPrice(pid,num,price);
+    });
+    $(".orderItemNumberSetting").keyup(function(){
+      var pid=$(this).attr("pid");
+      var stock=$(".orderItemStock[pid="+pid+"]").text();
+      var price=$(".orderItemPromotePrice[pid="+pid+"]").text();
+      var num=$(".orderItemNumberSetting[pid="+pid+"]").val();  
+      num = parseInt(num);
+      if(isNaN(num))
+        num=1;
+      if(num<=0)
+        num=1;
+      if(num>stock)
+        num=stock;
+      calcPrice(pid,num,price);
     });
   });
                                          
@@ -585,7 +618,7 @@ span.cartProductItemOriginalPrice{
               <span class="orderItemStock hidden" pid="365">75</span>
               <span class="orderItemPromotePrice hidden" pid="365">5306.0</span>
               <a href="#nowhere" class="numberMinus" pid="365">-</a>
-              <input class="orderItemNumberSetting" oiid="936" pid="365" value="4">
+              <input class="orderItemNumberSetting" oiid="936" pid="365" value="1">
               <a href="#nowhere" class="numberPlus" pid="365" stock="75">+</a>
             </div>
           </td>
