@@ -4,24 +4,64 @@
 <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 
 <style>
-
+div.boughtDiv{
+  max-width:1013px;
+  margin:10px auto;
+  }
+  div.orderType div{
+    border-bottom:2px solid #E8E8E8;
+    float:left;
+  }
+  div.orderType a{
+    font-size:16px;
+    font-weight:bold;
+    color:black;
+    border-right:1px solid #E8E8E8;
+    margin-bottom:10px;
+    padding:0px 20px;
+    display:inline-block;
+    text-decoration:none;
+  }
+  div.orderType a:hover{
+    color:#C40000;
+    text-decoration:none;
+  }
+  div.orderType div.selectedOrderType {
+    border-bottom:2px solid #C40000;
+    
+  }
+    div.selectedOrderType a{
+      color:#C40000;
+    }
+    a.noRightborder{
+      border-right-width:0px !important;
+  }
+  div.orderTypeLastOne{
+    height:34px;
+    overflow:hidden;
+    float:none !important;
+    border-bottom:2px solid #E8E8E8;
+  }
+  table.orderTypeTitleTable{
+    background-color:#F5F5F5;
+    margin:20px 0px;
+    text-align:center;
+    border:1px solid #E8E8E8;
+    font-size:12px;
+    width:100%;
+  }
+  table.orderTypeTitleTable td{
+    padding:12px 0px;
+  }
 </style>
-
-<script>
-$(function(){
-
-})
-</script>
 
 <div class="boughtDiv">
   <div class="orderType">
-    <div class="selectedOrderType">
-      <a href="#nowhere" orderStatus="all">所有订单</a>
-    </div>
+    <div class="selectedOrderType"><a href="#nowhere" orderStatus="all">所有订单</a></div>
     <div><a href="#nowhere" orderStatus="waitPay">待付款</a></div>
     <div><a href="#nowhere" orderStatus="waitDelivery">待发货</a></div>
-    <div><a href="#nowhere" orderStatus="waitConfirm">待收货</a></div>
-    <div class="noRightborder"><a href="#nowhere" orderStatus="waitReview">待评价</a></div>
+    <div><a href="#nowhere" orderStatus="waitComfirm">待收货</a></div>
+    <div><a href="#nowhere" orderStatus="waitReview" class="noRightborder">待评价</a></div>
     <div class="orderTypeLastOne"></div>
   </div>
   <div style="clear:both"></div>
@@ -39,34 +79,3 @@ $(function(){
     </table>
   </div>
 </div>
-<div style="height:500px"></div>
-
-
-
-//css
-  }
-  div.selectedOrderType a{
-    color:#C40000;
-  }
-  a.noRightborder{
-    border-right-width:0px !important;
-  }
-  div.orderTypeLastOne{
-    border-bottom:1px solid #e7e7e7;
-    overflow:hidden;
-    float:none !important;
-    height:26px;
-  }
-  table.orderTypeTitleTable{
-    border:1px solid #e7e7e7;
-    background-color:#f5f5f5;
-    font-size:12px;
-    width:100%;
-    margin:20px 0px;
-    text-align:center;
-  }
-  table.orderTypeTitleTable td{
-    padding:12px 0px;
-  }
-</style>
-
