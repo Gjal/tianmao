@@ -341,7 +341,7 @@ div.boughtDiv{
       $("table[orderStatus]").show();
     }else{
       $("table[orderStatus]").hide();
-      $("table[oderStstus="+orderStatus+"]").show();
+      $("table[orderStatus="+orderStatus+"]").show();
     }
     $("div.orderType div").removeClass("selectedOrderType");
     $(this).parent("div").addClass("selectedOrderType");
@@ -560,7 +560,7 @@ div.boughtDiv{
 
     <div><a href="#nowhere" orderStatus="waitDelivery">待发货</a></div>
 
-    <div><a href="#nowhere" orderStatus="waitComfirm">待收货</a></div>
+    <div><a href="#nowhere" orderStatus="waitConfirm">待收货</a></div>
 
     <div><a href="#nowhere" orderStatus="waitReview" class="noRightborder">待评价</a></div>
 
