@@ -31,7 +31,7 @@ $(function(){
 </nav>
 
 <div>
-  <a href="#nohwere"> <img src="http://how2j.cn/tmall/img/site/logo.gif" class="logo" id="logo">
+  <a href="#nohwere"> <img src="http://how2j.cn/tmall/img/site/logo.gif" class="logo" id="logo"></a>
   <div class="searchDiv">
     <input name="keyword" type="text" placeholder="时尚男鞋 太阳镜">
     <button class="searchButton" type="submit">搜索</button>
