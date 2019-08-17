@@ -16,7 +16,7 @@
     text-decoration:none;
   }
   .redColor{
-    color:#C40000;
+    color:#C40000 !important;
   }
 nav.top{
   background-color:#f2f2f2;
@@ -39,7 +39,7 @@ nav.top{
     z-index:-1;
   }
   div.searchDiv{
-    background-color:C40000;
+    background-color:#C40000;
     display:block;
     width:400px;
     height:40px;
